@@ -116,6 +116,16 @@
       margin-bottom: 0;
     }
 
+    .warning {
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #166534;
+      font-weight: 700;
+      margin: 16px 0 0;
+    }
+
     .table-wrap {
       overflow-x: auto;
       background: #ffffff;
@@ -187,17 +197,36 @@
       font-weight: 700;
     }
 
-    .svg-wrap {
+    .svg-wrap,
+    .mini-svg-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .svg-wrap {
       min-height: 80px;
       margin: 8px 0;
     }
 
-    svg {
+    .svg-wrap svg {
       max-width: 130px;
       height: auto;
+    }
+
+    .mini-svg-wrap {
+      min-height: 64px;
+      margin: 8px 0 12px;
+    }
+
+    .mini-svg-wrap svg {
+      max-width: 110px;
+      height: auto;
+    }
+
+    .timeline-card .mini-svg-wrap {
+      min-height: 56px;
+      margin-top: 12px;
     }
 
     .dot-title {
@@ -230,15 +259,6 @@
       color: #1d4ed8;
     }
 
-    .warning {
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: #166534;
-      font-weight: 700;
-    }
-
     footer {
       display: flex;
       justify-content: space-between;
@@ -268,13 +288,59 @@
 </head>
 
 <body>
+  <!-- SVGアイコン定義 -->
+  <svg width="0" height="0" style="position:absolute; left:-9999px; overflow:hidden;" aria-hidden="true" focusable="false">
+    <symbol id="icon-usb-a" viewBox="0 0 160 80">
+      <rect x="20" y="22" width="120" height="36" rx="4" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="30" y="30" width="100" height="20" fill="#555"/>
+      <rect x="44" y="38" width="16" height="6" fill="#facc15"/>
+      <rect x="76" y="38" width="16" height="6" fill="#facc15"/>
+      <rect x="108" y="38" width="16" height="6" fill="#facc15"/>
+    </symbol>
+
+    <symbol id="icon-usb-b" viewBox="0 0 160 80">
+      <path d="M55 18 H105 L120 33 V62 H40 V33 Z" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="58" y="36" width="44" height="22" fill="#555"/>
+      <rect x="66" y="44" width="10" height="6" fill="#facc15"/>
+      <rect x="86" y="44" width="10" height="6" fill="#facc15"/>
+    </symbol>
+
+    <symbol id="icon-mini-usb" viewBox="0 0 160 80">
+      <path d="M42 28 H118 L128 42 L118 56 H42 L32 42 Z" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="50" y="38" width="60" height="8" fill="#555"/>
+      <rect x="58" y="40" width="8" height="4" fill="#facc15"/>
+      <rect x="74" y="40" width="8" height="4" fill="#facc15"/>
+      <rect x="90" y="40" width="8" height="4" fill="#facc15"/>
+    </symbol>
+
+    <symbol id="icon-micro-usb" viewBox="0 0 160 80">
+      <path d="M36 32 H124 L132 48 H28 Z" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="50" y="39" width="60" height="7" fill="#555"/>
+      <rect x="58" y="41" width="7" height="3" fill="#facc15"/>
+      <rect x="74" y="41" width="7" height="3" fill="#facc15"/>
+      <rect x="90" y="41" width="7" height="3" fill="#facc15"/>
+    </symbol>
+
+    <symbol id="icon-usb-c" viewBox="0 0 160 80">
+      <rect x="24" y="26" width="112" height="28" rx="14" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="38" y="35" width="84" height="10" rx="5" fill="#555"/>
+      <rect x="50" y="38" width="60" height="4" fill="#facc15"/>
+    </symbol>
+
+    <symbol id="icon-thunderbolt" viewBox="0 0 160 80">
+      <rect x="20" y="26" width="96" height="28" rx="14" fill="#222" stroke="#000" stroke-width="4"/>
+      <rect x="34" y="35" width="68" height="10" rx="5" fill="#555"/>
+      <rect x="44" y="38" width="48" height="4" fill="#facc15"/>
+      <path d="M130 14 L112 42 H127 L116 68 L146 32 H130 Z" fill="#111827"/>
+    </symbol>
+  </svg>
+
   <header>
     <div>
       <h1>USB端子の種類一覧</h1>
       <p class="lead">USBコネクタの形状・規格・転送速度・給電能力をまとめた早見表です。</p>
     </div>
     <a class="top-link" href="https://kikaku-note.com/">規格ノート本体へ戻る</a>
-    
   </header>
 
   <main>
@@ -296,7 +362,11 @@
 
       <ul id="searchResults"></ul>
     </section>
-<p><strong>注意：</strong>USB端子は、形が同じでも転送速度・充電性能・映像出力対応が異なる場合があります。</p>
+
+    <p class="warning">
+      注意：USB端子は、形が同じでも転送速度・充電性能・映像出力対応が異なる場合があります。
+    </p>
+
     <h2>USB端子の仕様一覧表</h2>
 
     <div class="table-wrap">
@@ -386,74 +456,42 @@
       <div class="connector-card">
         USB-A
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="USB-A端子の簡易図">
-            <rect x="20" y="22" width="120" height="36" rx="4" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="30" y="30" width="100" height="20" fill="#555"/>
-            <rect x="44" y="38" width="16" height="6" fill="#facc15"/>
-            <rect x="76" y="38" width="16" height="6" fill="#facc15"/>
-            <rect x="108" y="38" width="16" height="6" fill="#facc15"/>
-          </svg>
+          <svg aria-label="USB-A端子の簡易図"><use href="#icon-usb-a"></use></svg>
         </div>
       </div>
 
       <div class="connector-card">
         USB-B
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="USB-B端子の簡易図">
-            <path d="M55 18 H105 L120 33 V62 H40 V33 Z" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="58" y="36" width="44" height="22" fill="#555"/>
-            <rect x="66" y="44" width="10" height="6" fill="#facc15"/>
-            <rect x="86" y="44" width="10" height="6" fill="#facc15"/>
-          </svg>
+          <svg aria-label="USB-B端子の簡易図"><use href="#icon-usb-b"></use></svg>
         </div>
       </div>
 
       <div class="connector-card">
         Mini USB
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="Mini USB端子の簡易図">
-            <path d="M42 28 H118 L128 42 L118 56 H42 L32 42 Z" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="50" y="38" width="60" height="8" fill="#555"/>
-            <rect x="58" y="40" width="8" height="4" fill="#facc15"/>
-            <rect x="74" y="40" width="8" height="4" fill="#facc15"/>
-            <rect x="90" y="40" width="8" height="4" fill="#facc15"/>
-          </svg>
+          <svg aria-label="Mini USB端子の簡易図"><use href="#icon-mini-usb"></use></svg>
         </div>
       </div>
 
       <div class="connector-card">
         Micro USB
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="Micro USB端子の簡易図">
-            <path d="M36 32 H124 L132 48 H28 Z" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="50" y="39" width="60" height="7" fill="#555"/>
-            <rect x="58" y="41" width="7" height="3" fill="#facc15"/>
-            <rect x="74" y="41" width="7" height="3" fill="#facc15"/>
-            <rect x="90" y="41" width="7" height="3" fill="#facc15"/>
-          </svg>
+          <svg aria-label="Micro USB端子の簡易図"><use href="#icon-micro-usb"></use></svg>
         </div>
       </div>
 
       <div class="connector-card">
         USB-C
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="USB-C端子の簡易図">
-            <rect x="24" y="26" width="112" height="28" rx="14" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="38" y="35" width="84" height="10" rx="5" fill="#555"/>
-            <rect x="50" y="38" width="60" height="4" fill="#facc15"/>
-          </svg>
+          <svg aria-label="USB-C端子の簡易図"><use href="#icon-usb-c"></use></svg>
         </div>
       </div>
 
       <div class="connector-card">
         Thunderbolt<br>USB-C形状
         <div class="svg-wrap">
-          <svg viewBox="0 0 160 80" aria-label="Thunderbolt端子の簡易図">
-            <rect x="20" y="26" width="96" height="28" rx="14" fill="#222" stroke="#000" stroke-width="4"/>
-            <rect x="34" y="35" width="68" height="10" rx="5" fill="#555"/>
-            <rect x="44" y="38" width="48" height="4" fill="#facc15"/>
-            <path d="M130 14 L112 42 H127 L116 68 L146 32 H130 Z" fill="#111827"/>
-          </svg>
+          <svg aria-label="Thunderbolt端子の簡易図"><use href="#icon-thunderbolt"></use></svg>
         </div>
       </div>
     </div>
@@ -463,36 +501,54 @@
     <div class="card-grid">
       <section class="info-card" id="usb-a">
         <div class="dot-title"><span class="dot"></span><h3>USB-A</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-A端子の簡易図"><use href="#icon-usb-a"></use></svg>
+        </div>
         <p>パソコンや充電器などで長く使われてきた標準的なUSB端子です。USBメモリ、キーボード、マウス、外付けHDDなどで広く使われています。</p>
         <p>端子に上下の向きがあるため、差し込む向きを確認する必要があります。</p>
       </section>
 
       <section class="info-card" id="usb-b">
         <div class="dot-title"><span class="dot"></span><h3>USB-B</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-B端子の簡易図"><use href="#icon-usb-b"></use></svg>
+        </div>
         <p>プリンター、スキャナー、オーディオインターフェースなどの周辺機器でよく使われた端子です。</p>
         <p>現在はUSB-Cへ移行している機器も増えています。</p>
       </section>
 
       <section class="info-card" id="mini-usb">
         <div class="dot-title"><span class="dot"></span><h3>Mini USB</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Mini USB端子の簡易図"><use href="#icon-mini-usb"></use></svg>
+        </div>
         <p>古いデジタルカメラ、ポータブル機器、ゲーム周辺機器などで使われていた小型端子です。</p>
         <p>現在はMicro USBやUSB-Cに置き換わっています。</p>
       </section>
 
       <section class="info-card" id="micro-usb">
         <div class="dot-title"><span class="dot"></span><h3>Micro USB</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Micro USB端子の簡易図"><use href="#icon-micro-usb"></use></svg>
+        </div>
         <p>少し前のAndroidスマートフォン、モバイルバッテリー、ワイヤレスイヤホンなどで広く使われた端子です。</p>
         <p>薄く小さい形状ですが、差し込む向きがあります。</p>
       </section>
 
       <section class="info-card" id="usb-c">
         <div class="dot-title"><span class="dot"></span><h3>USB-C</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-C端子の簡易図"><use href="#icon-usb-c"></use></svg>
+        </div>
         <p>上下どちらの向きでも差し込める新しい形状のUSB端子です。スマートフォン、ノートPC、タブレット、外付けSSDなどで広く使われています。</p>
         <p>ただし、形がUSB-Cでも、転送速度・映像出力・給電能力は機器やケーブルによって異なります。</p>
       </section>
 
       <section class="info-card" id="thunderbolt">
         <div class="dot-title"><span class="dot"></span><h3>Thunderbolt</h3></div>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Thunderbolt端子の簡易図"><use href="#icon-thunderbolt"></use></svg>
+        </div>
         <p>USB-Cと同じ形状の端子を使う高速接続規格です。外付けSSD、ドック、映像出力、業務用周辺機器などで使われます。</p>
         <p>USB-Cとの見分けには、稲妻マークや機器仕様の確認が重要です。</p>
       </section>
@@ -504,36 +560,54 @@
       <div class="timeline-card">
         <div class="year">1996〜</div>
         <h3>USB 1.1</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-A端子の簡易図"><use href="#icon-usb-a"></use></svg>
+        </div>
         <p>最大12Mbps。USB-A / USB-Bが普及。</p>
       </div>
 
       <div class="timeline-card">
         <div class="year">2000〜</div>
         <h3>USB 2.0</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Mini USB端子の簡易図"><use href="#icon-mini-usb"></use></svg>
+        </div>
         <p>最大480Mbps。Mini USBやMicro USBが広がる。</p>
       </div>
 
       <div class="timeline-card">
         <div class="year">2008〜</div>
         <h3>USB 3.0</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Micro USB端子の簡易図"><use href="#icon-micro-usb"></use></svg>
+        </div>
         <p>最大5Gbps。USB 3.x系の高速化が始まる。</p>
       </div>
 
       <div class="timeline-card">
         <div class="year">2013〜</div>
         <h3>USB 3.1</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-C端子の簡易図"><use href="#icon-usb-c"></use></svg>
+        </div>
         <p>Gen 1 / Gen 2表記。最大10Gbps級へ。</p>
       </div>
 
       <div class="timeline-card">
         <div class="year">2017〜</div>
         <h3>USB 3.2</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="USB-C端子の簡易図"><use href="#icon-usb-c"></use></svg>
+        </div>
         <p>Gen 2x2などの表記が登場。USB-C前提の高速化。</p>
       </div>
 
       <div class="timeline-card">
         <div class="year">2019〜</div>
         <h3>USB4</h3>
+        <div class="mini-svg-wrap">
+          <svg aria-label="Thunderbolt端子の簡易図"><use href="#icon-thunderbolt"></use></svg>
+        </div>
         <p>最大40Gbps級。Thunderbolt 3との互換性も重要に。</p>
       </div>
     </div>
