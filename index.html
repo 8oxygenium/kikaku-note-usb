@@ -3,34 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3M3YRW4B7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-C3M3YRW4B7');
-  </script>
-
-  <title>USB規格早見表 | 規格ノート</title>
+  <title>USB端子の種類一覧｜規格ノート</title>
+  <meta name="description" content="USB-A、USB-B、Mini USB、Micro USB、USB-C、Thunderboltなど、USB端子の形状・規格表記・転送速度・給電能力を一覧で確認できる早見表です。">
 </head>
 <body>
-  <main>
-    <h1>USB規格早見表</h1>
-    <p>USB端子・転送速度・充電規格・USB-Cケーブルの違いを確認するための早見表です。</p>
+  <h1>USB端子の種類一覧</h1>
 
-    <h2>主なページ</h2>
-    <ul>
-      <li>USB端子の種類一覧：準備中</li>
-      <li>USB 2.0 / USB 3.x / USB4 の違い：準備中</li>
-      <li>USB-Cケーブルの選び方：準備中</li>
-      <li>USB PDのW数一覧：準備中</li>
-      <li>ThunderboltとUSB-Cの違い：準備中</li>
-    </ul>
+  <p>
+    USB端子の形状、対応規格、転送速度、給電能力、USB PD対応の目安をまとめた早見表です。
+  </p>
 
-    <p><a href="https://kikaku-note.com/">規格ノート トップへ戻る</a></p>
-  </main>
+  <h2>ページ内検索</h2>
+  <input
+    type="search"
+    id="searchBox"
+    placeholder="例：USB-C、Micro USB、Thunderbolt"
+    style="width:100%; max-width:640px; padding:10px; font-size:16px;"
+  >
+
+  <ul id="searchResults"></ul>
+
+  <hr>
+
+  <h2>USB端子の仕様一覧表</h2>
+
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>コネクタ形状</th>
+        <th>主なUSB規格</th>
+        <th>USB 3.1規格表記</th>
+        <th>USB 3.2規格表記</th>
+        <th>データ転送速度</th>
+        <th>給電能力</th>
+        <th>USB PD</th>
+        <th>伝送距離の目安</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="#usb-a">USB-A</a></td>
+        <td>USB 1.1 / 2.0 / 3.x</td>
+        <td>Gen 1 / Gen 2</td>
+        <td>Gen 1 / Gen 2</td>
+        <td>最大480Mbps〜10Gbps程度</td>
+        <td>標準的な給電</td>
+        <td>基本的に非対応</td>
+        <td>数m程度</td>
+      </tr>
+      <tr>
+        <td><a href="#usb-b">USB-B</a></td>
+        <td>USB 1.1 / 2.0 / 3.x</td>
+        <td>Gen 1など</td>
+        <td>Gen 1など</td>
+        <td>最大480Mbps〜5Gbps程度</td>
+        <td>機器側仕様による</td>
+        <td>基本的に非対応</td>
+        <td>数m程度</td>
+      </tr>
+      <tr>
+        <td><a href="#mini-usb">Mini USB</a></td>
+        <td>主にUSB 2.0</td>
+        <td>該当なし</td>
+        <td>該当なし</td>
+        <td>最大480Mbps程度</td>
+        <td>低め</td>
+        <td>非対応</td>
+        <td>数m程度</td>
+      </tr>
+      <tr>
+        <td><a href="#micro-usb">Micro USB</a></td>
+        <td>主にUSB 2.0 / 一部USB 3.0</td>
+        <td>Gen 1相当の場合あり</td>
+        <td>Gen 1相当の場合あり</td>
+        <td>最大480Mbps〜5Gbps程度</td>
+        <td>低〜中程度</td>
+        <td>基本的に非対応</td>
+        <td>数m程度</td>
+      </tr>
+      <tr>
+        <td><a href="#usb-c">USB-C</a></td>
+        <td>USB 2.0 / 3.x / USB4</td>
+        <td>Gen 1 / Gen 2</td>
+        <td>Gen 1 / Gen 2 / Gen 2x2</td>
+        <td>最大480Mbps〜40Gbps以上</td>
+        <td>高め</td>
+        <td>対応する場合あり</td>
+        <td>規格・ケーブル品質による</td>
+      </tr>
+      <tr>
+        <td><a href="#thunderbolt">Thunderbolt</a></td>
+        <td>Thunderbolt 3 / 4 / 5</td>
+        <td>USB-C形状を使用</td>
+        <td>USB-C形状を使用</td>
+        <td>最大40Gbps〜80Gbps級</td>
+        <td>高め</td>
+        <td>対応する場合あり</td>
+        <td>規格・ケーブル品質による</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>USBコネクタの形状一覧</h2>
+
+  <section id="usb-a">
+    <h3>USB-A</h3>
+    <p>
+      USB-Aは、パソコンや充電器に長く使われてきた標準的な長方形のUSB端子です。
+      向きが決まっているため、上下を確認して差し込む必要があります。
+    </p>
+    <p>
+      マウス、キーボード、USBメモリ、外付けHDD、充電ケーブルなど幅広く使われています。
+    </p>
+  </section>
+
+  <section id="usb-b">
+    <h3>USB-B</h3>
+    <p>
+      USB-Bは、プリンター、スキャナー、オーディオインターフェースなどの周辺機器側でよく使われた端子です。
+      正方形に近い形状が特徴です。
+    </p>
+  </section>
+
+  <section id="mini-usb">
+    <h3>Mini USB</h3>
+    <p>
+      Mini USBは、古いデジタルカメラ、ポータブル機器、ゲーム周辺機器などで使われていた小型端子です。
+      現在はMicro USBやUSB-Cに置き換わっています。
+    </p>
+  </section>
+
+  <section id="micro-usb">
+    <h3>Micro USB</h3>
+    <p>
+      Micro USBは、少し前のAndroidスマートフォン、モバイルバッテリー、ワイヤレスイヤホン、電子小物などで多く使われた端子です。
+      薄く小さい形状ですが、向きがあります。
+    </p>
+  </section>
+
+  <section id="usb-c">
+    <h3>USB-C</h3>
+    <p>
+      USB-Cは、上下どちらの向きでも差し込める新しい形状のUSB端子です。
+      スマートフォン、ノートPC、タブレット、外付けSSD、ドッキングステーションなどで広く使われています。
+    </p>
+    <p>
+      ただし、形がUSB-Cでも、対応する転送速度・映像出力・給電能力はケーブルや機器によって異なります。
+    </p>
+  </section>
+
+  <section id="thunderbolt">
+    <h3>Thunderbolt</h3>
+    <p>
+      Thunderboltは、USB-Cと同じ形状の端子を使う高速接続規格です。
+      外付けSSD、映像出力、ドック、業務用周辺機器などで使われます。
+    </p>
+    <p>
+      端子の形だけではUSB-Cとの違いが分かりにくいため、稲妻マークや機器仕様の確認が重要です。
+    </p>
+  </section>
+
+  <hr>
+
+  <p>
+    <a href="https://kikaku-note.com/">規格ノート本体へ戻る</a>
+  </p>
+
+  <script>
+    const searchBox = document.getElementById('searchBox');
+    const searchResults = document.getElementById('searchResults');
+
+    const items = [
+      { name: 'USB-A', id: 'usb-a', keywords: 'usba usb-a 標準 長方形 パソコン 充電器 usbメモリ' },
+      { name: 'USB-B', id: 'usb-b', keywords: 'usbb usb-b プリンター スキャナー オーディオインターフェース' },
+      { name: 'Mini USB', id: 'mini-usb', keywords: 'mini usb mini-usb ミニusb 古いデジカメ ゲーム機器' },
+      { name: 'Micro USB', id: 'micro-usb', keywords: 'micro usb micro-usb マイクロusb android モバイルバッテリー' },
+      { name: 'USB-C', id: 'usb-c', keywords: 'usbc usb-c type-c タイプc スマホ ノートpc pd 高速充電' },
+      { name: 'Thunderbolt', id: 'thunderbolt', keywords: 'thunderbolt サンダーボルト 稲妻 高速 外付けssd ドック' }
+    ];
+
+    searchBox.addEventListener('input', function () {
+      const query = searchBox.value.trim().toLowerCase();
+      searchResults.innerHTML = '';
+
+      if (!query) return;
+
+      const matchedItems = items.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.keywords.toLowerCase().includes(query)
+      );
+
+      matchedItems.forEach(item => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + item.id;
+        a.textContent = item.name + ' の説明へ移動';
+        li.appendChild(a);
+        searchResults.appendChild(li);
+      });
+
+      if (matchedItems.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = '該当する項目がありません。';
+        searchResults.appendChild(li);
+      }
+    });
+  </script>
 </body>
 </html>
